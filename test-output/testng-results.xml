@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="15766" started-at="2016-08-08T08:22:55Z" finished-at="2016-08-08T08:23:11Z">
+  <suite name="Default suite" duration-ms="41320" started-at="2016-08-09T16:07:02Z" finished-at="2016-08-09T16:07:43Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="15766" started-at="2016-08-08T08:22:55Z" finished-at="2016-08-08T08:23:11Z">
-      <class name="test.WrongUser">
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:test.WrongUser@7ac7a4e4]" name="beforeClass" is-config="true" duration-ms="7427" started-at="2016-08-08T10:22:55Z" finished-at="2016-08-08T10:23:03Z">
+    <test name="Default test" duration-ms="41320" started-at="2016-08-09T16:07:02Z" finished-at="2016-08-09T16:07:43Z">
+      <class name="test2.Test2">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:test2.Test2@7ac7a4e4]" name="beforeClass" is-config="true" duration-ms="35539" started-at="2016-08-09T18:07:02Z" finished-at="2016-08-09T18:07:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="writeAndClick()[pri:0, instance:test.WrongUser@7ac7a4e4]" name="writeAndClick" duration-ms="7544" started-at="2016-08-08T10:23:03Z" finished-at="2016-08-08T10:23:10Z">
+        <test-method status="PASS" signature="f()[pri:0, instance:test2.Test2@7ac7a4e4]" name="f" duration-ms="3237" started-at="2016-08-09T18:07:37Z" finished-at="2016-08-09T18:07:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- writeAndClick -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:test.WrongUser@7ac7a4e4]" name="afterClass" is-config="true" duration-ms="751" started-at="2016-08-08T10:23:10Z" finished-at="2016-08-08T10:23:11Z">
+        </test-method> <!-- f -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:test2.Test2@7ac7a4e4]" name="afterClass" is-config="true" duration-ms="2417" started-at="2016-08-09T18:07:41Z" finished-at="2016-08-09T18:07:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-      </class> <!-- test.WrongUser -->
+      </class> <!-- test2.Test2 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
