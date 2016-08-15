@@ -10,7 +10,6 @@
           <include name="afterMethod"/>
           <include name="clearFields"/>
           <include name="beforeClass"/>
-          <include name="neuspesnoLogovanje"/>
           <include name="afterClass"/>
         </methods>
       </class> <!-- test.login.TestAnotations -->

@@ -24,7 +24,7 @@ public class TestAnotations {
 	Homepage homepage;
 	String message;
 
-	@Test(groups = {"login"})
+	/*	@Test()
 	public void neuspesnoLogovanje() {
 		System.out.println("Test: NeuspesnoLogovanje()");
 		loginPage.typeUsername("nenad");
@@ -32,14 +32,14 @@ public class TestAnotations {
 		loginPage.clckOnLoginButton();
 		
 		Verification.verifyErrorMsg("Invalid login, please try again", loginPage.getErrorMessage(), "Unsuccesful login verification");		
-	/*	String errorMessage = loginPage.getErrorMessage();
+	    //String errorMessage = loginPage.getErrorMessage();
 
-		assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
-		System.out.println("Test passed");*/
+		//assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
+		//System.out.println("Test passed");
+	} */
 
-	}
 
-	@Test(dependsOnMethods = "neuspesnoLogovanje")
+	/*@Test(dependsOnMethods = "neuspesnoLogovanje")
 	public void neuspesnoLogovanje1() {
 		System.out.println("Test: NeuspesnoLogovanje1()");
 		loginPage.typeUsername(Property.username);
@@ -48,13 +48,13 @@ public class TestAnotations {
 		
 		Verification.verifyErrorMsg("Invalid login, please try again", loginPage.getErrorMessage(), "Unsuccesful login verification");
 		
-	  /*String errorMessage = loginPage.getErrorMessage();
+	    //String errorMessage = loginPage.getErrorMessage();
 
-		assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
-		System.out.println("Test passed");*/
-	}
+		//assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
+		//System.out.println("Test passed");
+	} */
 
-	@Test(dependsOnMethods = "neuspesnoLogovanje1")
+	@Test(/*dependsOnMethods = "neuspesnoLogovanje1"*/)
 	public void UspesnoLogovanje() {
 
 		

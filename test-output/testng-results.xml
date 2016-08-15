@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="33579" started-at="2016-08-15T08:34:23Z" finished-at="2016-08-15T08:34:56Z">
+  <suite name="Default suite" duration-ms="11633" started-at="2016-08-15T13:55:04Z" finished-at="2016-08-15T13:55:15Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="33579" started-at="2016-08-15T08:34:23Z" finished-at="2016-08-15T08:34:56Z">
-      <class name="test1.Test1">
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:test1.Test1@7c0e2abd]" name="beforeClass" is-config="true" duration-ms="30045" started-at="2016-08-15T10:34:23Z" finished-at="2016-08-15T10:34:53Z">
+    <test name="Default test" duration-ms="11633" started-at="2016-08-15T13:55:04Z" finished-at="2016-08-15T13:55:15Z">
+      <class name="test.login.TestAnotations">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:test.login.TestAnotations@402f32ff]" name="beforeClass" is-config="true" duration-ms="7459" started-at="2016-08-15T15:55:04Z" finished-at="2016-08-15T15:55:11Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="verifyCareerTextLabel()[pri:0, instance:test1.Test1@7c0e2abd]" name="verifyCareerTextLabel" duration-ms="164" started-at="2016-08-15T10:34:53Z" finished-at="2016-08-15T10:34:53Z">
+        <test-method status="PASS" signature="clearFields()[pri:0, instance:test.login.TestAnotations@402f32ff]" name="clearFields" is-config="true" duration-ms="252" started-at="2016-08-15T15:55:11Z" finished-at="2016-08-15T15:55:11Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyCareerTextLabel -->
-        <test-method status="PASS" signature="verifyProfile()[pri:0, instance:test1.Test1@7c0e2abd]" name="verifyProfile" duration-ms="81" started-at="2016-08-15T10:34:53Z" depends-on-methods="test1.Test1.verifyCareerTextLabel" finished-at="2016-08-15T10:34:53Z">
+        </test-method> <!-- clearFields -->
+        <test-method status="PASS" signature="UspesnoLogovanje()[pri:0, instance:test.login.TestAnotations@402f32ff]" name="UspesnoLogovanje" duration-ms="3883" started-at="2016-08-15T15:55:11Z" finished-at="2016-08-15T15:55:15Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyProfile -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:test1.Test1@7c0e2abd]" name="afterClass" is-config="true" duration-ms="3171" started-at="2016-08-15T10:34:53Z" finished-at="2016-08-15T10:34:56Z">
+        </test-method> <!-- UspesnoLogovanje -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:test.login.TestAnotations@402f32ff]" name="afterClass" is-config="true" duration-ms="1" started-at="2016-08-15T15:55:15Z" finished-at="2016-08-15T15:55:15Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-      </class> <!-- test1.Test1 -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:test.login.TestAnotations@402f32ff]" name="afterMethod" is-config="true" duration-ms="0" started-at="2016-08-15T15:55:15Z" finished-at="2016-08-15T15:55:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- test.login.TestAnotations -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -6,6 +6,7 @@ import lib.date.Property;
 import lib.pages.Homepage;
 import lib.pages.LoginPage;
 import lib.pages.SearchResultPage;
+import lib.util.Prepere;
 
 import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +22,7 @@ public class Login {
 	
 	@BeforeClass
 	public void beforeClass() {
-		driver = new FirefoxDriver();
+		driver = Prepere.chromeDriver();
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(driver);
 	}
@@ -52,7 +53,7 @@ public class Login {
 	@AfterClass()
 	public void afterClass() {
 
-		//driver.quit();
+		driver.quit();
 
 	}
 }

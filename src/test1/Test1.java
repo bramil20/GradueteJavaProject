@@ -76,6 +76,7 @@ public class Test1 {
 	public void afterClass() {
 		System.out.println("After class");
 		myProfilePage.clickOnLogOutFromEndavaUni();
+		driver.quit();
 		
 		
 	}
