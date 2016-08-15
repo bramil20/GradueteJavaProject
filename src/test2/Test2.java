@@ -6,6 +6,7 @@ import lib.date.Property;
 import lib.pages.Homepage;
 import lib.pages.InternalSystemPage;
 import lib.pages.LoginPage;
+import lib.util.Prepere;
 
 import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +25,7 @@ public class Test2 {
   @BeforeClass
   public void beforeClass() {
 	  System.out.println("Before class  ");
-	    driver = new FirefoxDriver();
+	    driver = Prepere.chromeDriver();
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(driver);
 		
@@ -42,8 +43,8 @@ public class Test2 {
 	@Test
   public void f() {
 		System.out.println("Testing");
-		homepage.clickOnEndavaUniMenu();
-		internalPage=homepage.clickOnSubMenuInternal();
+		homepage.clickOnEndavaUniversity();
+		internalPage=homepage.clickOnInternalSystemSelfHelpLink();
 		
 		
 		message = internalPage.getParagraphDescription();

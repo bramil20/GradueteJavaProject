@@ -6,6 +6,7 @@ import lib.date.Property;
 import lib.pages.Homepage;
 import lib.pages.LoginPage;
 import lib.pages.MyProfilePage;
+import lib.util.Prepere;
 
 import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,7 @@ public class Test1 {
 	@BeforeClass
 	public void beforeClass() {
 		System.out.println("Test: Before class");
-		driver = new FirefoxDriver();
+		driver =  Prepere.chromeDriver();
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(driver);
 		
@@ -53,7 +54,7 @@ public class Test1 {
 		System.out.println("Verify Career Text Label");
 		message = myProfilePage.getEmailAddress();
 		
-		assert message.equals(Property.email) : "You are not logged in or this is not your email address. Test failed";
+		assert message.equals(myProfilePage.getEmailAddress()) : "You are not logged in or this is not your email address. Test failed";
 		System.out.println("Test passed");
 		
 		
@@ -74,7 +75,7 @@ public class Test1 {
 	@AfterClass
 	public void afterClass() {
 		System.out.println("After class");
-		myProfilePage.clickLogout();
+		myProfilePage.clickOnLogOutFromEndavaUni();
 		
 		
 	}

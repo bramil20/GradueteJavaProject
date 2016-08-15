@@ -6,8 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import lib.date.Property;
+import lib.util.Wait;
 
-public class LoginPage {
+public class LoginPage extends Page {
 	
 	@FindBy(id = "username")
 	private WebElement usernameInputField;
@@ -21,13 +22,15 @@ public class LoginPage {
 	@FindBy(className ="error")
 	private WebElement errorLabel;
 	
-	private WebDriver driver;
 	
+			
 	public LoginPage(WebDriver driver){
+		super(driver);
 		this.driver=driver;
 		driver.manage().window().maximize();
 		driver.get(Property.URL);
 		PageFactory.initElements(driver, this);
+		
 	}
 	
 	/**

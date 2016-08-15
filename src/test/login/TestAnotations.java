@@ -6,6 +6,8 @@ import lib.date.Property;
 //import lib.data.Property;
 import lib.pages.Homepage;
 import lib.pages.LoginPage;
+import lib.util.Prepere;
+import lib.util.Verification;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
@@ -14,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 
+//@Test(groups={"login"})
 public class TestAnotations {
 
 	private static WebDriver driver;
@@ -21,16 +24,18 @@ public class TestAnotations {
 	Homepage homepage;
 	String message;
 
-	@Test
+	@Test(groups = {"login"})
 	public void neuspesnoLogovanje() {
 		System.out.println("Test: NeuspesnoLogovanje()");
 		loginPage.typeUsername("nenad");
 		loginPage.typePassword(Property.password);
 		loginPage.clckOnLoginButton();
-		String errorMessage = loginPage.getErrorMessage();
+		
+		Verification.verifyErrorMsg("Invalid login, please try again", loginPage.getErrorMessage(), "Unsuccesful login verification");		
+	/*	String errorMessage = loginPage.getErrorMessage();
 
 		assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
-		System.out.println("Test passed");
+		System.out.println("Test passed");*/
 
 	}
 
@@ -40,10 +45,13 @@ public class TestAnotations {
 		loginPage.typeUsername(Property.username);
 		loginPage.typePassword("fdsfad");
 		loginPage.clckOnLoginButton();
-		String errorMessage = loginPage.getErrorMessage();
+		
+		Verification.verifyErrorMsg("Invalid login, please try again", loginPage.getErrorMessage(), "Unsuccesful login verification");
+		
+	  /*String errorMessage = loginPage.getErrorMessage();
 
 		assert errorMessage.contains("Invalid login") : "ERROR: You are logged in";
-		System.out.println("Test passed");
+		System.out.println("Test passed");*/
 	}
 
 	@Test(dependsOnMethods = "neuspesnoLogovanje1")
@@ -54,13 +62,19 @@ public class TestAnotations {
 			loginPage.typeUsername(Property.username);
 			loginPage.typePassword(Property.password);
 			homepage = loginPage.clckOnLoginButton();
+			
+			
+
+			Verification.verifyString("You are logged in", homepage.getTextFromLoginInfoLabel(), "Successfil login verification");
+			
+			/*
 			message = homepage.getTextFromLoginInfoLabel();
 			System.out.println(message);
-
 			assert message.contains("You are logged in") : "ERROR: You are not logged in";
-			System.out.println("Test passed");
-		
-	}
+			System.out.println("Test passed");*/
+	
+			
+		}
 
 	@BeforeMethod
 	public void clearFields() {
@@ -72,10 +86,10 @@ public class TestAnotations {
 	public void afterMethod() {
 	}
 
-	@BeforeClass
+	@BeforeClass(alwaysRun=true)
 	public void beforeClass() {
 		System.out.println("Before Class");
-		driver = new FirefoxDriver();
+		driver = Prepere.chromeDriver();
 		loginPage = new LoginPage(driver);
 	}
 
