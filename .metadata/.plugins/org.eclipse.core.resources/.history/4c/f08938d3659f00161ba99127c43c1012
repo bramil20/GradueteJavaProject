@@ -1,0 +1,70 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+import data.CSVReader;
+import data.MySql;
+import data.User;
+import pages.AdminPage;
+import pages.SignUpPage;
+import util.Prepare;
+import util.Verification;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.server.browserlaunchers.Sleeper;
+import org.testng.annotations.AfterClass;
+
+public class LoginTest {
+	WebDriver driver;
+	SignUpPage signUpPage;
+	AdminPage adminPage;
+	String message;
+
+	MySql sql = new MySql();
+	User u = new User(sql.getAnAdmin().getEmail(), sql.getAnAdmin().getEmail());
+
+	@BeforeClass
+	public void beforeMethod() {
+		driver = Prepare.chromeDriver();
+		// driver.manage().window().maximize();
+		signUpPage = new SignUpPage(driver);
+	}
+
+	@Test
+	public void login200() {
+
+		adminPage = signUpPage.successfulLogin(u);
+		Sleeper.sleepTight(750);
+
+		Verification.verifyString("You are logged in", adminPage.getInfoFromMessage(),
+				"Logging in with successful user");
+		Sleeper.sleepTight(1500);
+		signUpPage=adminPage.clickLogOut();
+		signUpPage=adminPage.clickLogOut();
+		Sleeper.sleepTight(1500);
+		}
+
+	@Test(dependsOnMethods="login200")
+	public void login401() {
+
+		signUpPage.unauthorizedLogin(u);
+		Sleeper.sleepTight(750);
+
+		Verification.verifyString("You are logged in", adminPage.getInfoFromMessage(),
+				"Logging in with unaouthorized user");
+	}
+
+	@AfterMethod
+	public void afterMethod() {
+
+	}
+
+	@AfterClass
+	public void afterClass() {
+
+	}
+
+}

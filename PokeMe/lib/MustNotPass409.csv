@@ -1,0 +1,3 @@
+same,email,asexisting,correct@correct.correct,correct,correct,c
+sameCAPS,email,asexisting,CORRECT@CORRECT.CORRECT,correct,correct,c
+same,emailwith,whitespace,  correct@correct.correct   ,correct,correct,c

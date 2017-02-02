@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;RegistrationTheRightWay.java&apos; to &apos;PokeMe/src/tests&apos;&#x0D;&#x0A;- Original project: &apos;PokeMe&apos;&#x0D;&#x0A;- Destination element: &apos;PokeMe/src/tests&apos;&#x0D;&#x0A;- Original element: &apos;tests.RegistrationTheRightWay.java&apos;" description="Copy compilation unit" destination="/src&lt;tests" element1="/src&lt;tests{RegistrationTheRightWay.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1476961495431" units="1" version="1.0"/>
+</session>

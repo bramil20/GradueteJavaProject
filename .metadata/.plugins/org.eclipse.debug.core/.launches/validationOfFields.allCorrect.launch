@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.testng.eclipse.launchconfig">
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="PokeMe"/>
+<mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
+<mapEntry key="tests.validationOfFields" value="allCorrect;justEmailIncorrect3;justEmailIncorrect2;allIncorrect;justEmailIncorrect;sameEmailAsExisting"/>
+</mapAttribute>
+<listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
+<listEntry value="tests.validationOfFields"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.METHOD_TEST_LIST">
+<listEntry value="allCorrect"/>
+<listEntry value="justEmailIncorrect3"/>
+<listEntry value="justEmailIncorrect2"/>
+<listEntry value="allIncorrect"/>
+<listEntry value="justEmailIncorrect"/>
+<listEntry value="sameEmailAsExisting"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
+<mapAttribute key="org.testng.eclipse.PARAMETERS"/>
+<stringAttribute key="org.testng.eclipse.PRE_DEFINED_LISTENERS" value=""/>
+<intAttribute key="org.testng.eclipse.TYPE" value="4"/>
+</launchConfiguration>

@@ -1,0 +1,354 @@
+package pages;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.server.browserlaunchers.Sleeper;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import com.mysql.jdbc.StringUtils;
+
+import data.CSVReader;
+import data.MySql;
+import data.User;
+import util.Verification;
+import util.Wait;
+
+public class SignUpPage {
+
+	// @FindBy(className = "btn btn-lg btn-danger")
+	// private WebElement signUpBtn;
+	// @FindBy(xpath = "//button[contains(@ng-click, 'open')]")
+	// private WebElement signUpBtn;
+	AdminPage adminPage;
+
+	@FindBy(xpath = "//button[contains(@class, 'danger')]")
+	private WebElement signUpBtn;
+
+	@FindBy(xpath = "//input[contains(@name, 'first')]")
+	private WebElement firstNameInputField;
+
+	@FindBy(xpath = "//input[contains(@name, 'last')]")
+	private WebElement lastNameInputField;
+
+	@FindBy(xpath = "//input[contains(@name, 'nick')]")
+	private WebElement nickNameInputField;
+
+	@FindBy(xpath = "//input[contains(@name, 'email')]")
+	private WebElement emailInputField;
+
+	@FindBy(xpath = "//input[contains(@ng-model, 'password')]")
+	private WebElement passInputField;
+
+	@FindBy(xpath = "//input[contains(@name, 'passwordRepeated')]") // ng-disabled
+	private WebElement passwordRepeatInputField;
+
+	@FindBy(xpath = "//button[contains(@ng-disabled, 'invalid')]")
+	private WebElement signUpButton2;
+
+	@FindBy(xpath = "//button[contains(@ng-click, 'Login')]") //
+	private WebElement loginButton;
+
+	@FindBy(xpath = "/html/body/div[1]/div/div/div[2]/div/button[1]")
+	private WebElement loginButton2;
+
+	@FindBy(xpath = "//button[contains(@class, 'primary')]")
+	private WebElement loginBtn2;
+
+	@FindBy(xpath = "//div[contains(@role, 'dialog')]")
+	private WebElement backGround;
+
+	@FindBy(xpath = "//button[contains(@ng-click, 'cancel')]")
+	private WebElement cancel;
+
+	@FindBy(xpath = "//*[@id='toast-container']/div/div/div/div")
+	private WebElement infoMessage;
+
+	@FindBy(xpath = "//button[contains(@disabled, 'disabled')]")
+	private WebElement disabledSignBtn;
+
+	protected WebDriver driver;
+	// CSVReader csv;
+	// User u = new User();
+
+	public SignUpPage(WebDriver driver) {
+		this.driver = driver;
+		driver.get(User.URL);
+		PageFactory.initElements(driver, this);
+	}
+
+	public SignUpPage clcikOnSignUpBtn() {
+		// Wait.untilWebElementVisible(driver, signUpBtn, 2);
+		signUpBtn.click();
+		return this;
+	}
+
+	public SignUpPage insertInputForAllFields(String firstName, String lastName, String user, String email,
+			String password, String passwordRepeat) {
+		firstNameInputField.sendKeys(firstName);
+		lastNameInputField.sendKeys(lastName);
+		nickNameInputField.sendKeys(user);
+		emailInputField.sendKeys(email);
+		passInputField.sendKeys(password);
+		passwordRepeatInputField.sendKeys(passwordRepeat);
+		return this;
+
+	}
+
+	public SignUpPage signUp(String firstName, String lastName, String user, String email, String password,
+			String passwordRepeat) {
+		clcikOnSignUpBtn();
+		firstNameInputField.sendKeys(firstName);
+		lastNameInputField.sendKeys(lastName);
+		nickNameInputField.sendKeys(user);
+		emailInputField.sendKeys(email);
+		passInputField.sendKeys(password);
+		passwordRepeatInputField.sendKeys(passwordRepeat);
+		clickOnSignUpBtn2();
+		return this;
+
+	}
+
+	public SignUpPage clickOnSignUpBtn2() {
+		signUpButton2.click();
+		return this;
+
+	}
+
+	public SignUpPage clickLoginBtn() {
+		loginButton.click();
+		return this;
+	}
+
+	public AdminPage loginToAdminPage(String email, String password) {
+		loginButton.click();
+		emailInputField.sendKeys(email);
+		passInputField.sendKeys(password);
+		loginBtn2.click();
+		return new AdminPage(driver);
+	}
+
+	public String getTextFromLabel() {
+		Wait.untilWebElementVisible(driver, infoMessage, 1500);
+		return infoMessage.getText();
+	}
+
+	public SignUpPage signUpOK() {
+
+		String csvFile = "lib/MustPass201.csv";
+
+		BufferedReader br = null;
+		String line = "";
+		String csvSplitBy = ",";
+
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+				String[] user = line.split(csvSplitBy);
+				User.setFirstName(user[0]);
+				User.setLastName(user[1]);
+				User.setNickName(user[2]);
+				User.setEmail(user[3]);
+				User.setPassword(user[4]);
+				User.setPasswordRepeat(user[5]);
+				// Property.mood = user[6];
+				signUpBtn.click();
+				Sleeper.sleepTight(1000);
+				firstNameInputField.sendKeys(User.getFirstName());
+				lastNameInputField.sendKeys(User.getLastName());
+				nickNameInputField.sendKeys(User.getNickName());
+				emailInputField.sendKeys(User.getEmail());
+				passInputField.sendKeys(User.getPassword());
+				passwordRepeatInputField.sendKeys(User.getPasswordRepeat());
+				Sleeper.sleepTight(500);
+				signUpButton2.click();
+
+				Verification.verifyString("Successfully registered, confirm your email", getTextFromLabel(),
+						"User [First name= " + user[0] + " , Last name= " + user[1] + "\n \tNick name= " + user[2]
+								+ " ," + " Email= " + user[3] + "\n \tPassword= " + user[4] + ", Password Repeat= "
+								+ user[5] + "]");
+				Sleeper.sleepTight(600);
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return this;
+
+	}
+
+	public SignUpPage signUpConflict() {
+
+		String csvFile = "lib/MustNotPass409.csv";
+
+		BufferedReader br = null;
+		String line = "";
+		String csvSplitBy = ",";
+
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+				String[] user = line.split(csvSplitBy);
+
+				User.setFirstName(user[0]);
+				User.setLastName(user[1]);
+				User.setNickName(user[2]);
+				User.setEmail(user[3]);
+				User.setPassword(user[4]);
+				User.setPasswordRepeat(user[5]);
+				// Property.mood = user[6];
+
+				signUpBtn.click();
+				Sleeper.sleepTight(1000);
+				firstNameInputField.sendKeys(User.getFirstName());
+				lastNameInputField.sendKeys(User.getLastName());
+				nickNameInputField.sendKeys(User.getNickName());
+				emailInputField.sendKeys(User.getEmail());
+				passInputField.sendKeys(User.getPassword());
+				passwordRepeatInputField.sendKeys(User.getPasswordRepeat());
+				Sleeper.sleepTight(300);
+				signUpButton2.click();
+				Sleeper.sleepTight(1100);
+
+				Verification.verifyString("User with this email already exist. Try different email.",
+						getTextFromLabel(),
+						"User [First name= " + user[0] + " , Last name= " + user[1] + "\n \tNick name= " + user[2]
+								+ " ," + " Email= " + user[3] + "\n \tPassword= " + user[4] + ", Password Repeat= "
+								+ user[5] + "]");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return this;
+
+	}
+
+	public SignUpPage signUpBadRequest() {
+
+		String csvFile = "lib/MustNotPass400.csv";
+
+		BufferedReader br = null;
+		String line = "";
+		String csvSplitBy = ",";
+
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+				String[] user = line.split(csvSplitBy);
+
+				User.setFirstName(user[0]);
+				User.setLastName(user[1]);
+				User.setNickName(user[2]);
+				User.setEmail(user[3]);
+				User.setPassword(user[4]);
+				User.setPasswordRepeat(user[5]);
+				// Property.mood = user[6];
+
+				signUpBtn.click();
+				Sleeper.sleepTight(1000);
+				firstNameInputField.sendKeys(User.getFirstName());
+				lastNameInputField.sendKeys(User.getLastName());
+				nickNameInputField.sendKeys(User.getNickName());
+				emailInputField.sendKeys(User.getEmail());
+				passInputField.sendKeys(User.getPassword());
+				passwordRepeatInputField.sendKeys(User.getPasswordRepeat());
+				Sleeper.sleepTight(300);
+				Verification.verifyBoolean(false, signUpButton2.isEnabled(),
+						"User [First name= " + user[0] + " , Last name= " + user[1] + "\n \tNick name= " + user[2]
+								+ " ," + " Email= " + user[3] + "\n \tPassword= " + user[4] + ", Password Repeat= "
+								+ user[5] + "]");
+				Sleeper.sleepTight(350);
+				cancel.click();
+				Sleeper.sleepTight(450);
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return this;
+
+	}
+
+	public AdminPage successfulLogin(User user) {
+		MySql sql = new MySql();
+		String emailToPass = "";
+		String email = sql.getAnAdmin().getEmail();
+		int iend = email.indexOf('@');
+
+		if (iend != -1)
+
+			emailToPass = email.substring(0, iend);
+		User u = new User(email, emailToPass);
+		System.out.println(email);
+
+		Sleeper.sleepTight(550);
+		clickLoginBtn();
+		emailInputField.sendKeys(email);
+		passInputField.sendKeys(emailToPass);
+		Sleeper.sleepTight(600);
+		loginButton2.click();
+
+		System.out.println(email);
+		System.out.println(emailToPass);
+
+		return new AdminPage(driver);
+	}
+
+	public AdminPage unauthorizedLogin(User user) {
+		ArrayList<User> list = CSVReader.csvValidUser();
+		for (User u : list) {
+			clickLoginBtn();
+			emailInputField.sendKeys("jhkjkh");//u.getPassword()
+			passInputField.sendKeys(u.getEmail());//u.getEmail()
+			Sleeper.sleepTight(600);
+			loginButton2.click();
+		}
+//		String email=CSVReader.csvValidUser().getEmail();
+//		String password=CSVReader.csvValidUser().getPassword();
+//		user= new User(email, password);
+		
+		
+		
+		return new AdminPage(driver);
+	}
+
+}
